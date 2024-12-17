@@ -1,0 +1,35 @@
+AWS Lambda
+
+First open AWS Lambda in Console
+
+create one function in that
+
+entre function name 
+
+give python latest version
+
+create a new role with basic lambda permissions
+
+next click on depoly
+
+next click on test and test that
+
+then next got to API and click on Rest API and create regional API
+
+next create method in that select function which was created by us
+
+next click on deploy API 
+
+then select URL and paste in web
+
+
+Then again got lambda in that select function and go to code secion replace the code
+which was we need to create 
+Then click on deploy 
+
+and then Test the code befor testing we need configure the role in the configuration section
+select the role and click on edit and then click on add more permissions in that select
+for what we need to give permission
+
+After addin the permission and again test the code  
+

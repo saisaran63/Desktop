@@ -1,0 +1,27 @@
+A CI/CD pipeline (Continuous Integration and Continuous Delivery/Deployment) 
+is a piece of equipment that is used for the continuous building, testing, 
+and deployment of software by automating the processes. 
+
+It is a means for the teams to integrate the code changes rapidly, 
+automatically test them and deliver updates efficiently.
+ 
+Teams are able to perform all these three operations 
+frequently and automatically
+
+
+CI:
+Ensure that code from multiple developers is integrated and tested frequently.
+Developers push code changes to a shared repository (e.g., Git).
+Upon each push, automated builds and tests are triggered.
+
+CD:
+Fully automate the deployment of code to production after passing all tests.
+After successful CI, code is deployed automatically to production 
+without human intervention.
+
+
+CICD Pipeline cloning without using git commands
+
+-----BEGIN OPENSSH PRIVATE KEY-----
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDN18T54RnbXEYcqDE6RFqNCuWBjijbiOTVE8pCykZkC1S5/+bmHpcq2wDch4fqI/GRFj331lHMYJ4OcfOaWE54XavHJ4P/sEC3TYKL+ZdBN/bGsZTtt7/BAxIVdksvjrQT7HIHjnBXveeKJL1n6JleRR8JuoLf4sQyGXadYwu7+OlWGS+IQI9Hjo/qIkmKmdOG2SM9RYacDnMD0ShOgKG1N6DLV6PpCW+wJJ60e14MjxAXUpy2RuN2qDjIbIbZNyRfvFuH77psR0C8kXrxpSkus0QaUIcB/xjdlVWXLOyR/pzZMG87j+t5No7K5e6Kluamia00ByggH1jhlzh25UbdR+TY7/lyRSsQJc/Z0/ZANLDHGSeey02t9peRzHJ6tx+xxC5iBz781r8AgOWc6qyPHOh8FvnxPR83Que51sHUB+hJsnjDAzMofA2vnHhCN7pTpHP3pSI5fWybTpFMZK2XIR4M+ZIBTJkfxXfpQfXKcpfLmUhgE5SxljhAtGFpkFk= root@ip-172-31-10-188.ap-south-1.compute.internal
+-----END OPENSSH PRIVATE KEY-----

@@ -1,0 +1,42 @@
+kubernetes is K8s
+It is extensible,portable and open-source
+It is designed by google in 2014
+
+
+.yml is compulosry in kubernetes 
+
+It is acutally an enhanched version of 'Borg'
+
+Key objects
+
+pod: It is the smallest and simplest basic unit of the
+Kubernetes application. This object indicates the 
+processes which are running in the cluster. 
+
+Node:A node is nothing but a single host, which is 
+used to run the virtual or physical machines.
+
+Service:A service in a Kubernetes is a logical set of 
+pods, which works together. 
+
+ReplicaSet: A ReplicaSet in the Kubernetes is used to 
+identify the particular number of pod replicas are 
+running at a given time.
+
+Namespace:Kubernetes supports various virtual clusters, 
+which are known as namespaces
+
+Features of kubernetes:
+
+Pob-->Horizantal scaling-->Automatic bin packing--> service
+discovery & load balancing-->Automates rollouts & rollbacks
+-->Presistent Storage-->self Healing
+
+kublet: 
+The Kubelet is a key component of a Kubernetes cluster 
+that runs on every node 
+(whether it's a master node or a worker node).
+It is an agent responsible for ensuring that the 
+containers running on the node are healthy and 
+functioning as expected.
+

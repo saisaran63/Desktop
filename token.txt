@@ -1,0 +1,26 @@
+squ_730d17550e0c8dc8e6f486a71105501c83d538a0
+
+
+ 
+       
+        stage ('Build war file'){
+            steps{
+                sh 'mvn clean install -DskipTests=true'
+            }
+        }
+        stage ('Build and push to docker hub'){
+            steps{
+                script{
+                    withDockerRegistry(credentialsId: 'docker', toolName: 'docker') {
+                        sh "docker build -t petshop ."
+                        sh "docker tag petshop saisaran63/nginx:latest"
+                        sh "docker pull saisaran63/nginx:latest"
+                   }
+                }
+            }
+        }
+        stage ('Deploy to container'){
+            steps{
+                sh 'docker run -d --name pet1 -p 8080:8080 saisaran63/nginx:latest'
+            }
+        }

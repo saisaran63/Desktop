@@ -1,0 +1,28 @@
+Spinnaker Commands:
+
+sudo apt install
+
+sudo apt install curl unzip apt-transport-https -y
+
+curl -O https://raw.githubusercontent.com/spinnaker/halyard/master/install/debian/InstallHalyard.sh
+
+sudo bash InstallHalyard.sh
+
+hal -v
+
+hal version list
+
+hal config version edit --version versionnumber
+
+hal deploy apply
+
+hal config ci jenkins enable
+
+hal config ci jenkins master add Jenkins-Master --address http://{IPAddress}:8080 --username $USERNAME --password
+
+hal config ci jenkins master edit Jenkins-Master --csrf true
+
+
+vim /opt/spinnaker/config/spinnaker-local.yml
+igor:
+    enabled: true

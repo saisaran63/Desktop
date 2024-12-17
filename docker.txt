@@ -1,0 +1,96 @@
+docker run -d --name sonarqube-db -e POSTGRES_USER=sonar -e POSTGRES_PASSWORD=sonar -e POSTGRES_DB=sonarqube postgres:alpine
+
+docker run -d --name sonarqube -p 9000:9000 --link sonarqube-db:db -e SONAR_JDBC_URL=jdbc:postgresql://db:5432/sonarqube -e SONAR_JDBC_USERNAME=sonar -e SONAR_JDBC_PASSWORD=sonar sonarqube
+
+nano ~/.bashrc
+
+export SONAR_SCANNER_HOME=/path/to/sonar-scanner
+
+export PATH=$SONAR_SCANNER_HOME/bin:$PATH
+
+pipeline{
+    agent any
+    tools {
+        jdk 'jdk17'
+        maven 'maven3'
+    }
+    environment {
+        SCANNER_HOME=tool 'sonar-scanner'
+    }
+    stages{
+        stage ('clean Workspace'){
+            steps{
+                cleanWs()
+            }
+        }
+        stage ('checkout scm') {
+            steps {
+                git ' https://github.com/Venn1991/jpetstore-6.git'
+            }
+        }
+        stage ('maven compile') {
+            steps {
+                sh 'mvn clean compile'
+            }
+        }
+        stage ('maven Test') {
+            steps {
+                sh 'mvn test'
+            }
+        }
+        
+        stage("Sonarqube Analysis "){
+            steps{
+                withSonarQubeEnv('sonar-server') {
+                    sh ''' $SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=Petshop \
+                    -Dsonar.java.binaries=. \
+                    -Dsonar.projectKey=Petshop '''
+                }
+            }
+        }
+        stage("quality gate"){
+            steps {
+                script {
+                  waitForQualityGate abortPipeline: false, credentialsId: 'Sonar-token' 
+                }
+           }
+        }
+        
+        stage ('Build war file'){
+            steps{
+                sh 'mvn clean install -DskipTests=true'
+            }
+        }
+        stage("OWASP Dependency Check"){
+            steps{
+                dependencyCheck additionalArguments: '--scan ./ --format XML ', odcInstallation: 'DP-Check'
+                dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
+            }
+        }
+        
+        stage ('Build docker image'){     -------> take secrete text id=kondal1989 secrete=Kondal@1989
+            steps{
+                script{
+                    sh 'docker image build -t kondal1989/petsshop:latest .'
+                }
+            }
+                }
+        stage ('Push image'){
+            steps{
+                script{
+                    withCredentials([string(credentialsId: 'kondal1989', variable: 'kondal')]) {
+                    sh "docker login -u kondal1989 -p ${kondal} "
+                    }
+                    sh "docker image push kondal1989/petsshop:latest"
+                }
+            }
+        }
+        
+        stage ('Deploy to container'){
+            steps{
+                sh 'docker run -d --name pet1 -p 8080:8080 kondal1989/petsshop:latest'
+            }
+        }
+    }
+    
+}
